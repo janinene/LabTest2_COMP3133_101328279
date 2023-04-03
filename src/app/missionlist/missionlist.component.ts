@@ -10,6 +10,7 @@ import { SpacexapiService } from '../network/spacexapi.service';
 export class MissionlistComponent implements OnInit {
 
   missions: any;
+  launch_year: string = '';
 
   constructor (private spacexapi : SpacexapiService) {}
 
@@ -17,7 +18,14 @@ export class MissionlistComponent implements OnInit {
     this.spacexapi.getAllList()
       .subscribe( (missions) => {
         this.missions = missions;
-        this.filteredMissions = missions;
+      })
+  }
+
+  filterByLaunchYear(): void {
+    this.spacexapi.getFilteredMissions(this.launch_year)
+      .subscribe((missions) => {
+        this.missions = missions;
+        console.log(missions);
       })
   }
 }

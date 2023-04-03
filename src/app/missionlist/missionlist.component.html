@@ -1,4 +1,12 @@
-<p>SpaceX Mission Launch List</p>
+<h1>SpaceX Mission Launch List</h1>
+
+<form>
+  <label for="year">Year:</label>
+  <input type="text" id="year" [(ngModel)]="launch_year" name="launch_year">
+  <button type="button" (click)="filterByLaunchYear()">Search</button>
+</form>
+
+
 <div *ngFor="let mission of missions">
     <h3>{{ mission.mission_name }} ({{ mission.launch_year }})</h3>
     <p>{{ mission.details }}</p>
