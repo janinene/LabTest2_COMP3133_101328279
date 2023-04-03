@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SpacexapiService } from '../network/spacexapi.service';
 
 @Component({
@@ -9,10 +9,15 @@ import { SpacexapiService } from '../network/spacexapi.service';
 })
 export class MissionlistComponent implements OnInit {
 
+  @Output() missionSelected = new EventEmitter<string>()
   missions: any;
   launch_year: string = '';
 
   constructor (private spacexapi : SpacexapiService) {}
+
+  selectMission(flightNumber: string) {
+    this.missionSelected.emit(flightNumber);
+  }
 
   ngOnInit(): void {
     this.spacexapi.getAllList()
@@ -22,7 +27,7 @@ export class MissionlistComponent implements OnInit {
   }
 
   filterByLaunchYear(): void {
-    this.spacexapi.getFilteredMissions(this.launch_year)
+    this.spacexapi.getFilteredMissionsByYear(this.launch_year)
       .subscribe((missions) => {
         this.missions = missions;
         console.log(missions);

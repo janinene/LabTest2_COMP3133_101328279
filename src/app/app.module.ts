@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MissiondetailsComponent } from './missiondetails/missiondetails.component';
+import { SpacexapiService } from './network/spacexapi.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { MissiondetailsComponent } from './missiondetails/missiondetails.compone
     CommonModule,
     FormsModule
   ],
-  providers: [],
+  providers: [SpacexapiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

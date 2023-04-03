@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = '101328279-lab-test2-comp3133';
+  flight_number!: string;
+
+  missionSelected(selectedMission: any) {
+    this.flight_number = selectedMission.flight_number;
+  }
 }

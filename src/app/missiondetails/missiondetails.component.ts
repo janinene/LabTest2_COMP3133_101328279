@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { SpacexapiService } from '../network/spacexapi.service';
 
 @Component({
@@ -7,10 +6,24 @@ import { SpacexapiService } from '../network/spacexapi.service';
   templateUrl: './missiondetails.component.html',
   styleUrls: ['./missiondetails.component.css']
 })
+
 export class MissiondetailsComponent {
 
-  constructor (
-    private spacexapi : SpacexapiService,
-    private route : ActivatedRoute) {}
+  @Input() flightNumber!: string;
+  missionDetails: any;
 
+  constructor (
+    private spacexapi : SpacexapiService) {}
+
+    ngOnInit(): void {
+      this.spacexapi.getMissionListDetailsByFlightNumber(this.flightNumber)
+        .subscribe((missionDetail) => {
+          this.missionDetails = missionDetail;
+          console.log(missionDetail)
+        },
+        (error) => {
+          console.log('Error:', error);
+        }
+        )
+    }
 }

@@ -1,1 +1,7 @@
-<p>missiondetails works!</p>
+<h1>Mission Details for Flight #{{ flightNumber }}</h1>
+
+<div *ngIf="missionDetails">
+  <h2>{{ missionDetails.mission_name }} ({{ missionDetails.launch_year }})</h2>
+  <p>{{ missionDetails.details }}</p>
+  <img src="{{ missionDetails.links.mission_patch_small }}" alt="Mission Patch">
+</div>
