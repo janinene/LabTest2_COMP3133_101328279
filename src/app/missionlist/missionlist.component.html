@@ -1,0 +1,5 @@
+<p>SpaceX Mission Launch List</p>
+<div *ngFor="let mission of missions">
+    <h3>{{ mission.mission_name }} ({{ mission.launch_year }})</h3>
+    <p>{{ mission.details }}</p>
+  </div>
