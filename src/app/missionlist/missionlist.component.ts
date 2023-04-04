@@ -1,6 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SpacexapiService } from '../network/spacexapi.service';
+import { Mission } from '../models/mission';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-missionlist',
@@ -9,15 +11,14 @@ import { SpacexapiService } from '../network/spacexapi.service';
 })
 export class MissionlistComponent implements OnInit {
 
-  @Output() missionSelected = new EventEmitter<string>()
-  missions: any;
+  missions: Mission[] = [];
   launch_year: string = '';
+  selectedMission: Mission | undefined;
+  selectedFlightNumber: string | undefined;
 
-  constructor (private spacexapi : SpacexapiService) {}
+  constructor (private spacexapi : SpacexapiService, private router: Router) {}
 
-  selectMission(flightNumber: string) {
-    this.missionSelected.emit(flightNumber);
-  }
+
 
   ngOnInit(): void {
     this.spacexapi.getAllList()
@@ -32,5 +33,18 @@ export class MissionlistComponent implements OnInit {
         this.missions = missions;
         console.log(missions);
       })
+  }
+
+  showMissionDetails(flightNumber: string): void {
+    this.spacexapi.getMissionListDetailsByFlightNumber(flightNumber).subscribe(
+      (data: Mission) => {
+        this.selectedMission = data;
+        this.selectedFlightNumber = flightNumber;
+        this.router.navigate(['/missions', flightNumber]);
+      },
+      (error) => {
+        console.log('Error:', error);
+      }
+    )
   }
 }

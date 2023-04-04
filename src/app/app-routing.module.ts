@@ -4,8 +4,9 @@ import { MissionlistComponent } from './missionlist/missionlist.component';
 import { MissiondetailsComponent } from './missiondetails/missiondetails.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/missions', pathMatch: 'full' },
   { path: '', component: MissionlistComponent },
-  { path: 'missiondetails/:flight_number', component: MissiondetailsComponent }
+  { path: 'missions/:flight_number', component: MissiondetailsComponent }
 ];
 
 @NgModule({

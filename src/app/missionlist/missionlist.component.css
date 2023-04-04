@@ -3,10 +3,12 @@
     align-items: center;
     margin-bottom: 20px;
     background-color: aliceblue;
+    text-decoration: none;
+    color: black;
 }
 
 .mission-image {
-    width: 7%;
+    width: 70px;
     margin-right: 20px;
 }
 

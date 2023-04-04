@@ -304,8 +304,9 @@
 
 <div>
 
-  <app-missionlist (missionSelected)="flight_number = $event"></app-missionlist>
+  <app-missionlist></app-missionlist>
   <app-missiondetails [flightNumber]="flight_number"></app-missiondetails>
+  
 
 </div>
 
@@ -318,3 +319,4 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet></router-outlet>
+

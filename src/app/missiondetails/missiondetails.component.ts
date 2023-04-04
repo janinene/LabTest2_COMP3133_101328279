@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { SpacexapiService } from '../network/spacexapi.service';
+import { Mission } from '../models/mission';
 
 @Component({
   selector: 'app-missiondetails',
@@ -9,6 +10,7 @@ import { SpacexapiService } from '../network/spacexapi.service';
 
 export class MissiondetailsComponent {
 
+  @Input() mission!: Mission;
   @Input() flightNumber!: string;
   missionDetails: any;
 
@@ -17,13 +19,18 @@ export class MissiondetailsComponent {
 
     ngOnInit(): void {
       this.spacexapi.getMissionListDetailsByFlightNumber(this.flightNumber)
-        .subscribe((missionDetail) => {
-          this.missionDetails = missionDetail;
-          console.log(missionDetail)
-        },
-        (error) => {
-          console.log('Error:', error);
-        }
-        )
+        .subscribe(
+          (missionDetail) => {
+            this.missionDetails = missionDetail;
+            console.log(missionDetail);
+          },
+          (error) => {
+            console.log('Error:', error);
+          }
+        );
+    }
+     
+    goBack() {
+      window.history.back();
     }
 }

@@ -1,27 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { retry } from 'rxjs';
+import { Observable, retry } from 'rxjs';
+import { Mission } from '../models/mission';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpacexapiService {
-
+ 
   private REST_API_URL = "https://api.spacexdata.com/v3/launches";
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
-  public getAllList() {
-    return this.httpClient.get(this.REST_API_URL).pipe(retry(3))
+  public navigate(commands: any[], extras?: { state: { mission: Mission } }): void {
+    this.router.navigate(commands, extras);
   }
-  public getFilteredMissionsByYear(launch_year: string) {
+
+  public getAllList(): Observable<Mission[]> {
+    return this.httpClient.get<Mission[]>(this.REST_API_URL).pipe(retry(3))
+  }
+  public getFilteredMissionsByYear(launch_year: string) : Observable<Mission[]> {
     const FILTER_MISSION = `https://api.spacexdata.com/v3/launches?launch_year=${launch_year}`
-    return this.httpClient.get(FILTER_MISSION).pipe(retry(3))
+    return this.httpClient.get<Mission[]>(FILTER_MISSION).pipe(retry(3))
   }
 
-  public getMissionListDetailsByFlightNumber(flight_number: string) {
+  public getMissionListDetailsByFlightNumber(flight_number: string) : Observable<Mission> {
     const FILTER_BY_FLIGHT = `https://api.spacexdata.com/v3/launches/${flight_number}`
-    return this.httpClient.get(FILTER_BY_FLIGHT).pipe(retry(3))
+    return this.httpClient.get<Mission>(FILTER_BY_FLIGHT).pipe(retry(3))
   }
   
 }

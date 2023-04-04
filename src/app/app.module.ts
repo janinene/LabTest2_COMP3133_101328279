@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MissionlistComponent } from './missionlist/missionlist.component'; 
 import {HttpClientModule} from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MissiondetailsComponent } from './missiondetails/missiondetails.component';
 import { SpacexapiService } from './network/spacexapi.service';
@@ -20,10 +19,9 @@ import { SpacexapiService } from './network/spacexapi.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule,
     FormsModule
   ],
-  providers: [SpacexapiService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
