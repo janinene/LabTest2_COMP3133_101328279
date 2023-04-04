@@ -34,6 +34,11 @@ export class MissionlistComponent implements OnInit {
         console.log(missions);
       })
   }
+  
+  closeMissionDetails(): void {
+    this.selectedMission = undefined;
+    this.selectedFlightNumber = undefined;
+  }
 
   showMissionDetails(flightNumber: string): void {
     this.spacexapi.getMissionListDetailsByFlightNumber(flightNumber).subscribe(
@@ -47,4 +52,6 @@ export class MissionlistComponent implements OnInit {
       }
     )
   }
+
+
 }

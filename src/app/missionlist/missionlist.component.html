@@ -17,4 +17,9 @@
   </div>
 </div>
 
-<app-missiondetails *ngIf="selectedMission && selectedFlightNumber" [mission]="selectedMission" [flightNumber]="selectedFlightNumber"></app-missiondetails>
+<div class="popup" [ngClass]="{'show': selectedMission}">
+  <div class="popup-inner">
+    <button (click)="closeMissionDetails()" class="close-button">X</button>
+    <app-missiondetails *ngIf="selectedMission && selectedFlightNumber" [mission]="selectedMission" [flightNumber]="selectedFlightNumber"></app-missiondetails>
+  </div>
+</div>
